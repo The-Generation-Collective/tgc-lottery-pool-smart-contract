@@ -1,24 +1,39 @@
 // SPDX-License-Identifier: GPL-3.0
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+//  $$$$$$\   $$$$$$\  $$$$$$$\
+// $$  __$$\ $$  __$$\ $$  __$$\
+// $$ /  \__|$$ /  $$ |$$ |  $$ |
+// $$ |$$$$\ $$ |  $$ |$$$$$$$  |
+// $$ |\_$$ |$$ |  $$ |$$  __$$<
+// $$ |  $$ |$$ |  $$ |$$ |  $$ |
+// \$$$$$$  | $$$$$$  |$$ |  $$ |
+//  \______/  \______/ \__|  \__|
+
+// @title : TGC Lottery Pool Contract
+// @desc: A lottery pool contract that allows users to buy tickets and win prizes
+// @author: @ass77
+// @team: https://instagram.com/generation_of_rexxie
+// @team: https://twitter.com/tgenerationcollective
+// @url: https://tgcollective.xyz
+
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Lottery {
-    uint256 public constant ticketPrice = 0.01 ether;
-    uint256 public constant maxTickets = 100; // maximum tickets per lottery
-    uint256 public constant ticketCommission = 0.001 ether; // commition per ticket
-    uint256 public constant duration = 30 minutes; // The duration set for the lottery
+    uint256 public constant ticketPrice = 1 ether;
+    uint256 public constant maxTickets = 100; // maximum tickets per lottery round
+    uint256 public constant ticketCommission = 0.01 ether; // commition per ticket - 1% from ticket price
+    uint256 public constant duration = 10080 minutes; // The duration set for the lottery - 1 week
 
-    uint256 public expiration; // Timeout in case That the lottery was not carried out.
-    address public lotteryOperator; // the crator of the lottery
-    uint256 public operatorTotalCommission = 0; // the total commission balance
-    address public lastWinner; // the last winner of the lottery
-    uint256 public lastWinnerAmount; // the last winner amount of the lottery
+    uint256 public expiration;
+    address public lotteryOperator; // the crator of the lottery - tgc admin
+    uint256 public operatorTotalCommission = 0;
+    address public lastWinner;
+    uint256 public lastWinnerAmount;
 
-    mapping(address => uint256) public winnings; // maps the winners to there winnings
-    address[] public tickets; //array of purchased Tickets
+    mapping(address => uint256) public winnings;
+    address[] public tickets;
 
-    // modifier to check if caller is the lottery operator
     modifier isOperator() {
         require(
             (msg.sender == lotteryOperator),
@@ -27,7 +42,6 @@ contract Lottery {
         _;
     }
 
-    // modifier to check if caller is a winner
     modifier isWinner() {
         require(IsWinner(), "Caller is not a winner");
         _;
@@ -38,7 +52,6 @@ contract Lottery {
         expiration = block.timestamp + duration;
     }
 
-    // return all the tickets
     function getTickets() public view returns (address[] memory) {
         return tickets;
     }
