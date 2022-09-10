@@ -16,10 +16,8 @@
 
 - deployer address - `0x041ba5a08c590190Dbde1d9BfFEb8b7Bac980C5F`
 - contract - `0x2538081fF6C9cD48c0030E3C7d98f7Aa601B7143`
-- [release link](https://thirdweb.com/contracts/release/QmUsB8wLhw1bYZhkNt1A5ucHuDgyWrhfj2iGyWz6vX1b2z)
 
 ### Production
 
-- deployer address - `0x041ba5a08c590190Dbde1d9BfFEb8b7Bac980C5F`
-- contract - `0x2538081fF6C9cD48c0030E3C7d98f7Aa601B7143`
-- [release link]()
+- deployer address - `0xf6b3ccE719f4A8Def331d94D67b1eEE2D093df4c`
+- contract - `0x18960C0B19Ba1983d960A653409Ca91F45C96738`
