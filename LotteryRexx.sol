@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 //  \______/  \______/ \__|  \__|
 
 // @title : TGC Lottery Pool Contract
-// @desc: A lottery pool contract that allows users to buy tickets and win prizes
+// @desc: A lottery pool contract that allows users to buy tickets and win prizes + 1 free ticket for each REXX owner
 // @author: @ass77
 // @team: https://instagram.com/generation_of_rexxie
 // @team: https://twitter.com/tgenerationcollective
