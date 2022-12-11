@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.7.3"
-  }
+	"name": "hardhat-javascript-starter",
+	"scripts": {
+		"build": "npx thirdweb@latest detect",
+		"deploy": "npx thirdweb@latest deploy",
+		"release": "npx thirdweb@latest release"
+	},
+	"devDependencies": {
+		"hardhat": "^2.10.1"
+	},
+	"dependencies": {
+		"@thirdweb-dev/contracts": "^3",
+		"@openzeppelin/contracts": "^4.7.3"
+	}
 }

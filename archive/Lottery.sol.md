@@ -1,17 +1,19 @@
+```js
+
 // SPDX-License-Identifier: GPL-3.0
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-//  $$$$$$\   $$$$$$\  $$$$$$$\
-// $$  __$$\ $$  __$$\ $$  __$$\
-// $$ /  \__|$$ /  $$ |$$ |  $$ |
-// $$ |$$$$\ $$ |  $$ |$$$$$$$  |
-// $$ |\_$$ |$$ |  $$ |$$  __$$<
-// $$ |  $$ |$$ |  $$ |$$ |  $$ |
-// \$$$$$$  | $$$$$$  |$$ |  $$ |
-//  \______/  \______/ \__|  \__|
+// $$$$$$\   $$$$$$\  $$$$$$$\
+// $$ **$$\ $$ **$$\ $$  __$$\
+// $$ / \_\_|$$ / $$ |$$ | $$ |
+// $$ |$$$$\ $$ | $$ |$$$$$$$  |
+// $$ |\_$$ |$$ | $$ |$$ **$$<
+// $$ |  $$ |$$ | $$ |$$ | $$ |
+// \$$$$$$ | $$$$$$ |$$ | $$ |
+// \_\_\_\_**/ \_**\_**/ \_\_| \_\_|
 
 // @title : TGC Lottery Pool Contract
-// @desc: A lottery pool contract that allows users to buy tickets and win prizes + 1 free ticket for each REXX owner
+// @desc: A lottery pool contract that allows users to buy tickets and win prizes
 // @author: @ass77
 // @team: https://instagram.com/generation_of_rexxie
 // @team: https://twitter.com/tgenerationcollective
@@ -19,23 +21,17 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 pragma solidity >=0.7.0 <0.9.0;
 
-interface rexxContract {
-    function balanceOf(address account) external view returns (uint256);
-}
-
-contract LotteryRexx {
-    uint256 public constant ticketPrice = 1 ether;
-    uint256 public constant maxTickets = 1000; // maximum tickets per lottery round
-    uint256 public constant ticketCommission = 0.001 ether; // commition per ticket - 0.1% from ticket price
-    uint256 public constant duration = 10080 minutes; // The duration set for the lottery - 1 week
+contract Lottery {
+uint256 public constant ticketPrice = 1 ether;
+uint256 public constant maxTickets = 100; // maximum tickets per lottery round
+uint256 public constant ticketCommission = 0.01 ether; // commition per ticket - 1% from ticket price
+uint256 public constant duration = 10080 minutes; // The duration set for the lottery - 1 week
 
     uint256 public expiration;
-    address public lotteryOperator; // the creator of the lottery - tgc admin
+    address public lotteryOperator; // the crator of the lottery - tgc admin
     uint256 public operatorTotalCommission = 0;
     address public lastWinner;
     uint256 public lastWinnerAmount;
-
-    rexxContract rexxieOwner;
 
     mapping(address => uint256) public winnings;
     address[] public tickets;
@@ -56,7 +52,6 @@ contract LotteryRexx {
     constructor() {
         lotteryOperator = msg.sender;
         expiration = block.timestamp + duration;
-        rexxieOwner = rexxContract(0x4Ee221b4f305a4aBEA22558996a1d18e8F60dd28);
     }
 
     function getTickets() public view returns (address[] memory) {
@@ -73,15 +68,10 @@ contract LotteryRexx {
             string.concat(
                 "the value must be multiple of ",
                 Strings.toString(ticketPrice),
-                " Matic"
+                " Ether"
             )
         );
         uint256 numOfTicketsToBuy = msg.value / ticketPrice;
-
-        // REXX owner get 1 free ticket for each purchase
-        if (rexxieOwner.balanceOf(msg.sender) > 0) {
-            numOfTicketsToBuy += 1;
-        }
 
         require(
             numOfTicketsToBuy <= RemainingTickets(),
@@ -166,4 +156,6 @@ contract LotteryRexx {
     function RemainingTickets() public view returns (uint256) {
         return maxTickets - tickets.length;
     }
+
 }
+```
