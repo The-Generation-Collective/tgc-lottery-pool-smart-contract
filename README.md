@@ -30,8 +30,6 @@ After any changes to the contract, run:
 
 ```bash
 npm run build
-# or
-yarn build
 ```
 
 to compile your contracts. This will also detect the [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) detected on your contract.
