@@ -18,17 +18,17 @@ pragma solidity ^0.8.9;
 // @github: https://github.com/the-generation-collective
 // @url: https://tgcollective.xyz
 
-interface rexxContract {
+interface testContract {
     function balanceOf(address account) external view returns (uint256);
 }
 
-contract LotteryRexx {
-    rexxContract rexxieOwner;
+contract TestLotteryRexx {
+    testContract testOwner;
 
     uint256 public constant ticketPrice = 1 ether;
-    uint256 public constant maxTickets = 1000;
+    uint256 public constant maxTickets = 10;
     uint256 public constant ticketCommission = 0.01 ether; // commission per ticket - 1% from ticket price
-    uint256 public constant duration = 10080 minutes; // The duration set for a round of lottery - 1 week
+    uint256 public constant duration = 30 minutes; // The duration set for a round of lottery - 1 week
 
     uint256 public expiration;
     address public lotteryOperator;
@@ -64,7 +64,7 @@ contract LotteryRexx {
     constructor() {
         lotteryOperator = msg.sender;
         expiration = block.timestamp + duration;
-        rexxieOwner = rexxContract(0x4Ee221b4f305a4aBEA22558996a1d18e8F60dd28);
+        testOwner = testContract(0xc8860Ebad4Bb6a857B5618ec348F71B6E9c23588);
     }
 
     function getTickets() public view returns (address[] memory) {
@@ -126,7 +126,7 @@ contract LotteryRexx {
         uint256 winningTicket3 = randomNumber3 % tickets.length;
 
         // check if the user who bought the ticket is holding the NFT
-        uint256 nftBalance = rexxieOwner.balanceOf(msg.sender);
+        uint256 nftBalance = testOwner.balanceOf(msg.sender);
 
         if (nftBalance > 0) {
             // increase the odds based on the number of NFTs the user has

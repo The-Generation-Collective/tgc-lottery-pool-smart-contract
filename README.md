@@ -2,29 +2,27 @@
 
 ### What's good here ?
 
-- A lottery pool with Polygon blockchain just for fun
-- A winner of the lottery round shall be picked based on the `modulo operation` of :
+- This is a smart contract for a lottery pool on any EVM-compatible blockchains. The contract defines various parameters such as the ticket price, maximum number of tickets per round, and commission taken per ticket. It also has a duration for each round. The contract allows users to buy tickets, check their winnings, and withdraw their winnings if they are the winner. The lottery operator can also withdraw their commission and draw a winner at the end of the round. If the lottery is not expired, users can refund their tickets. The contract uses a random number generated from the block hash and timestamp to determine the winner. The contract also has various access control modifiers to ensure that only the lottery operator can perform certain functions.
+
+- The winners (top 3) of the lottery round shall be picked based on the `modulo operation` of :
+
+#### Top 3 Prizes
+
+- number 1 prize = 60% from the total prize pool
+- number 2 prize = 25% from the total prize pool
+- number 3 prize = 15% from the total prize pool
 
 1. hashed of the `current block timestamp` and `current number - tickets length`
 2. the tickets length
+3. the winners odds shall increased based on how many REXX NFT they are holding!
 
-### Smart Contract Deployment & Verification
+- if the user has `1 to 3 REXX NFT`, increase the odds by `2%` AKA `TIER 1 REXX`
+- if the user has `4 to 6 REXXNFT`, increase the odds by `6%` AKA `TIER 2 REXX`
+- if the user has `7 REXX NFT`, increase the odds by `10%` AKA `TIER 3 REXX`
 
-- deploy and verify smart contract using thirdweb sdk with `npx thirdweb@latest release`
+## How To
 
-### Development
-
-- (Adri addr)deployer address - `0x041ba5a08c590190Dbde1d9BfFEb8b7Bac980C5F`
-- contract v1 (archive) - `0x2538081fF6C9cD48c0030E3C7d98f7Aa601B7143`
-- contract v2 - ``
-
-### Production
-
-- (REXX deployer addr) deployer address - `0xf6b3ccE719f4A8Def331d94D67b1eEE2D093df4c`
-- contract v1 (archive) - `0x18960C0B19Ba1983d960A653409Ca91F45C96738`
-- contract v2 - ``
-
-## Building the project
+### Build the project
 
 After any changes to the contract, run:
 
@@ -34,7 +32,7 @@ npm run build
 
 to compile your contracts. This will also detect the [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) detected on your contract.
 
-## Deploying Contracts
+### Deploying Contracts
 
 When you're ready to deploy your contracts, just run one of the following command to deploy you're contracts:
 
@@ -42,7 +40,7 @@ When you're ready to deploy your contracts, just run one of the following comman
 npm run deploy
 ```
 
-## Releasing Contracts
+### Releasing Contracts
 
 If you want to release a version of your contracts publicly, you can use one of the followings command:
 
