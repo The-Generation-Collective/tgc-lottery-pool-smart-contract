@@ -10,6 +10,6 @@
 	},
 	"dependencies": {
 		"@thirdweb-dev/contracts": "^3",
-		"@openzeppelin/contracts": "^4.9.3"
+		"@openzeppelin/contracts": "^4.9.6"
 	}
 }
